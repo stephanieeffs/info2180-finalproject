@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `contacts`
 --
 
-CREATE TABLE `contacts` (
+CREATE TABLE IF NOT EXISTS `contacts` (
   `id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `firstname` varchar(255) DEFAULT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE `contacts` (
 -- Table structure for table `notes`
 --
 
-CREATE TABLE `notes` (
+CREATE TABLE IF NOT EXISTS `notes` (
   `id` int(11) NOT NULL,
   `contact_id` int(11) DEFAULT NULL,
   `comment` text DEFAULT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE `notes` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL,
   `firstname` varchar(128) DEFAULT NULL,
   `lastname` varchar(128) DEFAULT NULL,
@@ -71,6 +71,9 @@ CREATE TABLE `users` (
   `role` varchar(100) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO users (email, password)
+VALUES ('admin@project2.com', SHA2('password123', 256));
 
 --
 -- Indexes for dumped tables
