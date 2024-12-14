@@ -1,0 +1,175 @@
+
+html, body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+     background: #ffe6f0; 
+    color: #333;
+}
+
+
+header {
+    background: palevioletred;
+    color: white;
+    padding: 1rem;
+    text-align: left;
+    font-size: 18px;
+}
+
+.container {
+    display: flex;
+}
+
+
+nav {
+    width: 220px;
+    background: lightseagreen;
+    height: 100vh;
+    padding: 1rem;
+}
+
+nav a {
+    display: block;
+    margin: 1rem 0;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+nav ol {
+    list-style: none; 
+    padding: 0; 
+    margin: 0;
+}
+
+
+nav a:hover {
+    background: #1f4068;
+}
+
+
+main {
+    flex: 1;
+    padding: 2rem;
+}
+
+.dashboardHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.filter-label {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #333;
+    margin-right: 10px; 
+}
+
+.filter-icon-label i {
+    font-size: 1rem;
+    color: #555;
+}
+
+
+.Addcontact-btn {
+    background: purple; 
+    color: white;
+    padding: 0.2rem 0.8rem; 
+    border-radius: 5px;
+    text-decoration: none; 
+    font-weight: bold; 
+    display: inline-block; 
+    line-height: 1; 
+    height: 2rem;
+}
+
+.Addcontact-btn:hover {
+    background: #45a049; 
+}
+
+
+.filter-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.filter-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background: #e0e0e0;
+    color: #333;
+    text-decoration: none;
+}
+
+.filter-btn.active {
+    background: #4CAF50;
+    color: white;
+}
+
+.filter-btn:hover {
+    background: #d0d0d0;
+}
+
+
+.contacts-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.contacts-table th, .contacts-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.contacts-table th {
+    background: #f7f7f7;
+}
+
+.contacts-table tr:hover {
+    background: #f9f9f9;
+}
+
+
+.type-badge {
+    padding: 0.3rem 0.6rem;
+    border-radius: 3px;
+    color: white;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.type-badge.sales {
+    background: #ffa500;
+}
+
+.type-badge.support {
+    background: #007bff;
+}
+
+.view-link {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.view-link:hover {
+    text-decoration: underline;
+}
