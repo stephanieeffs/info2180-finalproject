@@ -31,6 +31,11 @@ $stmt = $conn->prepare("SELECT * FROM users where id= " . $row['assigned_to']);
 $stmt->execute();
 $assigned_to= $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
 
+//GETTING THE NOTES FOR THE CONTACT
+$stmt = $conn->prepare("SELECT * FROM notes where contact_id= " . $row['id']);
+$stmt->execute();
+$notes= $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
 function convertDateFormat($date){
     $date = explode("-", $date);
