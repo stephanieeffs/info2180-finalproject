@@ -2,7 +2,7 @@
 
 $host = "localhost";
 $username = "root";
-$password = ""; // Empty password for XAMPP by default
+$password = "061502kp"; // Empty password for XAMPP by default
 $database = "dolphin_crm";
 
 $conn = new mysqli($host, $username, $password, $database);

@@ -1,4 +1,3 @@
-
 function loginUser() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -13,39 +12,42 @@ function loginUser() {
         .then((response) => response.json())
         .then((data) => {
             if (data.success) {
-                alert("Login successful!");
-                document.getElementById("login-form").classList.add("hidden");
-                document.getElementById("add-user-form").classList.remove("hidden");
+                // Hide login form and display dashboard
+                document.getElementById("login-form").style.display = "none";
+                document.getElementById("dashboard").classList.remove("hidden");
+
+                // Fetch and load contacts for the dashboard
+                loadContacts();
             } else {
-                alert("Login failed: " + data.error);
+                document.getElementById("login-error").style.display = "block";
             }
         })
-        .catch((error) => console.error("Fetch error:", error));
+        .catch((error) => console.error("Error:", error));
 }
 
+function logoutUser() {
+    // Simple reload for now
+    location.reload();
+}
 
-function addUser() {
-    const firstName = document.getElementById("first_name").value;
-    const lastName = document.getElementById("last_name").value;
-    const email = document.getElementById("new_email").value;
-    const password = document.getElementById("new_password").value;
-    const role = document.getElementById("role").value;
-
-    fetch("add_user.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: `first_name=${encodeURIComponent(firstName)}&last_name=${encodeURIComponent(lastName)}&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}&role=${encodeURIComponent(role)}`,
-    })
+function loadContacts() {
+    fetch("dashboard.php?action=fetch_contacts&filter=all")
         .then((response) => response.json())
-        .then((data) => {
-            if (data.success) {
-                document.getElementById("add-user-success").style.display = "block";
-                document.getElementById("add-user-error").style.display = "none";
-            } else {
-                document.getElementById("add-user-error").style.display = "block";
-                document.getElementById("add-user-success").style.display = "none";
-            }
-        });
+        .then((contacts) => {
+            const tableBody = document.getElementById("contacts-table-body");
+            tableBody.innerHTML = ""; // Clear previous data
+
+            contacts.forEach((contact) => {
+                const row = `
+                    <tr>
+                        <td>${contact.firstname} ${contact.lastname}</td>
+                        <td>${contact.email}</td>
+                        <td>${contact.company}</td>
+                        <td><span class="type-badge">${contact.type}</span></td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        })
+        .catch((error) => console.error("Error loading contacts:", error));
 }
