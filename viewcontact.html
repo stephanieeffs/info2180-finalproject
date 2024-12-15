@@ -11,6 +11,51 @@
     <div id="contactDetails">
       <!-- Contact details will load here dynamically -->
     </div>
+  
+            <div class="n-container">
+                    <div class="notes-container">
+                        
+                        <div class="notes-title">
+                            <label for="notes">
+                                <i class="fa-sharp fa-solid fa-pen-to-square"></i>
+                            </label>
+                            <input type="text" value="Notes" readonly>
+                        </div>
+
+
+                    <div class="w-notes">
+                        <?php
+                            foreach($notes as $note){
+                                //Getting name of person who made note
+                                $stmt = $conn->prepare("SELECT * FROM users where id= " . $row['created_by']);
+                                $stmt->execute();
+                                $user= $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+
+                                echo "<div class=\"written-notes\">";
+                                    echo "<h4>" . $user['firstname'] . " " . $user['lastname'] . "</h4>";
+                                    echo "<p class=\"pnotes\">" . $note['comment'] . "</p>";
+                                    echo "<p class=\"date\">" . convertDateFormat(substr($note['created_at'], 0, 10)) . " at" . substr($note['created_at'], 10) . "</p>";
+                                echo "</div>";
+                            }
+                        ?>
+                    </div>    
+
+                        <div class="add-notes">
+                            <form>
+
+                                <div class="editnotes">
+                                <label for="editnotes">Add a Note about <?php echo $row['title'] . " " . $row['firstname']?></label> <!--filler text-->
+                                <textarea name="editnotes" id="editnotes" cols="50" rows="10" placeholder="Enter details here"></textarea>
+                                </div>
+
+                                <div class="add-note-btn">
+                                    <input type="submit" value="Add Note" class = "<?php echo $id?>" id="addNote">
+                                </div>
+
+                            </form>
+
+                        </div>
+    
 
     <script>
       async function loadContactDetails() {
