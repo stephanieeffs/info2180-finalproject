@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Details</title>
+    <link rel="stylesheet" href="viewcontact.css" />
+  </head>
+  <body>
+    <h1>View Contact Details</h1>
+    <div id="contactDetails">
+      <!-- Contact details will load here dynamically -->
+    </div>
+
+    <script>
+      async function loadContactDetails() {
+        try {
+          const response = await fetch("/api/contact?id=1"); // Example API
+          if (!response.ok) throw new Error("Failed to fetch contact details");
+          const data = await response.json();
+
+          document.getElementById("contactDetails").innerHTML = `
+                    <p><strong>Name:</strong> ${data.firstname} ${
+            data.lastname
+          }</p>
+                    <p><strong>Email:</strong> ${data.email}</p>
+                    <p><strong>Phone:</strong> ${data.telephone}</p>
+                    <p><strong>Company:</strong> ${data.company}</p>
+                    <p><strong>Notes:</strong> ${
+                      data.notes || "No notes available"
+                    }</p>
+                `;
+        } catch (error) {
+          console.error(error);
+          document.getElementById("contactDetails").textContent =
+            "Failed to load details.";
+        }
+      }
+      loadContactDetails();
+    </script>
+  </body>
+</html>
