@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dolphin CRM Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <span class="header-icon">🐬</span>  Dolphin CRM
+    </header>
+    
+    
+    <div class="container">
+        <nav>
+            <ol>
+                <li><a href="#homepage">Home</a></li>
+                <li><a href="newContact.php">New Contact</a></li>
+                <li><a href="users.php">Users</a></li>
+                <li><a href="logout.php">Logout</a></li>
+            </ol>
+        </nav>
+        <main>
+            <div class="dashboardHeader">
+                <h2>Dashboard</h2>
+                <a href="newContact.php" class="Addcontact-btn">+ Add Contact</a>
+            </div>
+            <div class="filter-bar">
+                <span class="filter-icon-label">
+                    <i class="fas fa-filter"></i> Filter By:
+                </span>
+                <a href="dashboard.php?filter=All" class="filter-btn active" aria-current="page">All</a>
+                <a href="dashboard.php?filter=Sales" class="filter-btn">Sales Leads</a>
+                <a href="dashboard.php?filter=Support" class="filter-btn">Support</a>
+                <a href="dashboard.php?filter=AssignedTo" class="filter-btn">Assigned to me</a>
+            </div>
+            <table class="contacts-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Company</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mr. Michael Scott</td>
+                        <td>michael.scott@paper.co</td>
+                        <td>The Paper Company</td>
+                        <td><span class="type-badge sales">SALES LEAD</span></td>
+                        <td><a href="#" class="view-link">View</a></td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Dwight Schrute</td>
+                        <td>dwight.schrute@paper.co</td>
+                        <td>The Paper Company</td>
+                        <td><span class="type-badge support">SUPPORT</span></td>
+                        <td><a href="#" class="view-link">View</a></td>
+                    </tr>
+                    <tr>
+                        <td>Ms. Pam Beesly</td>
+                        <td>pam.beesly@dunder.co</td>
+                        <td>Dunder Mifflin</td>
+                        <td><span class="type-badge support">SUPPORT</span></td>
+                        <td><a href="#" class="view-link">View</a></td>
+                    </tr>
+                    <tr>
+                        <td>Ms. Angela Martin</td>
+                        <td>angela.martin@vance.co</td>
+                        <td>Vance Refrigeration </td>
+                        <td><span class="type-badge sales">SALES LEAD</span></td>
+                        <td><a href="#" class="view-link">View</a></td>
+                    </tr>
+                    <tr>
+                        <td>Ms. Kelly Kapoor</td>
+                        <td>kelly.kapoor@vance.co</td>
+                        <td>Vance Refrigeration</td>
+                        <td><span class="type-badge support">SUPPORT</span></td>
+                        <td><a href="#" class="view-link">View</a></td>
+                    </tr>
+                    <tr>
+                        <td>Mr. Jim Halpert</td>
+                        <td>jim.halpert@dunder.co</td>
+                        <td>Dunder Mifflin</td>
+                        <td><span class="type-badge sales">SALES LEAD</span></td>
+                        <td><a href="#" class="view-link">View</a></td>
+                    </tr>
+                    <script src="dashboard.js"></script>
+
+                </tbody>
+            </table>
+        </main>
+    </div>
+</body>
+</html>
