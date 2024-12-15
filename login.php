@@ -1,42 +1,36 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 session_start();
-require_once 'database.php'; // Include your database connection
+require 'db_connection.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Establish the connection to your MySQL database
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check if the connection is successful
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    // Prepare the SQL query
+    $stmt = $conn->prepare("SELECT id, password, role FROM users WHERE email = ?");
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
     }
 
-    // Fetch user record based on email
-    $sql = "SELECT * FROM users WHERE email = ?";
-    $stmt = $conn->prepare($sql);
+    // Bind and execute the query
     $stmt->bind_param("s", $email);
     $stmt->execute();
-    $result = $stmt->get_result();
+    $stmt->bind_result($id, $hashed_password, $role);
+    $stmt->fetch();
 
-    if ($result->num_rows == 1) {
-        $user = $result->fetch_assoc();
-
-        // Verify password
-        if (hash_equals($user['password_hash'], hash('sha256', $password))) {
-            $_SESSION['user_id'] = $user['id'];
-            header("Location: dashboard.php");
-            exit();
-        } else {
-            echo "Invalid password";
-        }
+    // Verify the password
+    if ($hashed_password && password_verify($password, $hashed_password)) {
+        $_SESSION['user_id'] = $id;
+        $_SESSION['role'] = $role;
+        echo json_encode(["success" => true]);
     } else {
-        echo "No user found with this email";
+        echo json_encode(["success" => false, "error" => "Invalid credentials"]);
     }
 
     $stmt->close();
-    $conn->close();
 }
+
+$conn->close();
 ?>
