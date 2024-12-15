@@ -10,9 +10,12 @@ try {
         $filter = $_GET['filter'] ?? 'all';
         $where = $params = [];
 
-        if ($filter === 'sales_leads') $where[] = "type = ?", $params[] = "Sales Lead";
-        if ($filter === 'support') $where[] = "type = ?", $params[] = "Support";
-        if ($filter === 'assigned_to_me') $where[] = "assigned_to = ?", $params[] = $_SESSION['user_id'] ?? 1;
+        if ($filter === 'sales_leads') $where[] = "type = ?";
+         $params[] = "Sales Lead";
+        if ($filter === 'support') $where[] = "type = ?";
+         $params[] = "Support";
+        if ($filter === 'assigned_to_me') $where[] = "assigned_to = ?"; 
+        $params[] = $_SESSION['user_id'] ?? 1;
 
         $query = "SELECT id, title, firstname, lastname, email, company, type FROM contacts";
         if ($where) $query .= " WHERE " . implode(" AND ", $where);

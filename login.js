@@ -23,7 +23,7 @@ function loginUser() {
         .catch((error) => console.error("Fetch error:", error));
 }
 
-
+/*
 function addUser() {
     const firstName = document.getElementById("first_name").value;
     const lastName = document.getElementById("last_name").value;
@@ -49,3 +49,4 @@ function addUser() {
             }
         });
 }
+*/
