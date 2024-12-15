@@ -3,11 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Login</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
+    <title>User Login and Dashboard</title>
+    <link rel="stylesheet" href="styles.css"> <!-- General styles -->
+    <link rel="stylesheet" href="dashboard.css"> <!-- Dashboard styles -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <!-- User Login Form -->
+    <!-- Login Section -->
     <div id="login-form">
         <h2>Login</h2>
         <form id="login">
@@ -15,27 +22,98 @@
             <input type="password" id="password" placeholder="Password" required>
             <button type="button" onclick="loginUser()">Login</button>
         </form>
-        <p id="login-error">Invalid login credentials. Please try again.</p>
+        <p id="login-error" style="color: red; display: none;">Invalid login credentials. Please try again.</p>
     </div>
-<!--
-   
-    <div id="add-user-form" class="hidden">
-        <h2>Add User</h2>
-        <form id="addUser">
-            <input type="text" id="first_name" placeholder="First Name" required>
-            <input type="text" id="last_name" placeholder="Last Name" required>
-            <input type="email" id="new_email" placeholder="Email Address" required>
-            <input type="password" id="new_password" placeholder="Password" required>
-            <select id="role" required>
-                <option value="Member">Member</option>
-                <option value="Admin">Admin</option>
-            </select>
-            <button type="button" onclick="addUser()">Add User</button>
-        </form>
-        <p id="add-user-success">User added successfully!</p>
-        <p id="add-user-error">Failed to add user. Please check inputs.</p>
+
+    <!-- Dashboard Section -->
+    <div id="dashboard" class="hidden">
+        <header>
+            <span class="header-icon">🐬</span> Dolphin CRM
+        </header>
+        <div class="container">
+            <nav>
+                <ol>
+                    <li><a href="#homepage">Home</a></li>
+                    <li><a href="newContact.php">New Contact</a></li>
+                    <li><a href="users.php">Users</a></li>
+                    <li><a href="logout.php">Logout</a></li>
+                </ol>
+            </nav>
+            <main>
+                <div class="dashboardHeader">
+                    <h2>Dashboard</h2>
+                    <a href="newContact.php" class="Addcontact-btn">+ Add Contact</a>
+                </div>
+                <div class="filter-bar">
+                    <span class="filter-icon-label">
+                        <i class="fas fa-filter"></i> Filter By:
+                    </span>
+                    <a href="dashboard.php?filter=All" class="filter-btn active" aria-current="page">All</a>
+                    <a href="dashboard.php?filter=Sales" class="filter-btn">Sales Leads</a>
+                    <a href="dashboard.php?filter=Support" class="filter-btn">Support</a>
+                    <a href="dashboard.php?filter=AssignedTo" class="filter-btn">Assigned to me</a>
+                </div>
+                <table class="contacts-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Company</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mr. Michael Scott</td>
+                            <td>michael.scott@paper.co</td>
+                            <td>The Paper Company</td>
+                            <td><span class="type-badge sales">SALES LEAD</span></td>
+                            <td><a href="#" class="view-link">View</a></td>
+                        </tr>
+                        <tr>
+                            <td>Mr. Dwight Schrute</td>
+                            <td>dwight.schrute@paper.co</td>
+                            <td>The Paper Company</td>
+                            <td><span class="type-badge support">SUPPORT</span></td>
+                            <td><a href="#" class="view-link">View</a></td>
+                        </tr>
+                        <tr>
+                            <td>Ms. Pam Beesly</td>
+                            <td>pam.beesly@dunder.co</td>
+                            <td>Dunder Mifflin</td>
+                            <td><span class="type-badge support">SUPPORT</span></td>
+                            <td><a href="#" class="view-link">View</a></td>
+                        </tr>
+                        <tr>
+                            <td>Ms. Angela Martin</td>
+                            <td>angela.martin@vance.co</td>
+                            <td>Vance Refrigeration </td>
+                            <td><span class="type-badge sales">SALES LEAD</span></td>
+                            <td><a href="#" class="view-link">View</a></td>
+                        </tr>
+                        <tr>
+                            <td>Ms. Kelly Kapoor</td>
+                            <td>kelly.kapoor@vance.co</td>
+                            <td>Vance Refrigeration</td>
+                            <td><span class="type-badge support">SUPPORT</span></td>
+                            <td><a href="#" class="view-link">View</a></td>
+                        </tr>
+                        <tr>
+                            <td>Mr. Jim Halpert</td>
+                            <td>jim.halpert@dunder.co</td>
+                            <td>Dunder Mifflin</td>
+                            <td><span class="type-badge sales">SALES LEAD</span></td>
+                            <td><a href="#" class="view-link">View</a></td>
+                        </tr>
+                        <script src="dashboard.js"></script>
+    
+                    </tbody>
+                </table>
+        </div>
     </div>
--->
-    <script src="login.js"></script> 
+
+    <!-- Scripts -->
+    <script src="login.js"></script>
+    <script src="dashboard.js"></script>
 </body>
 </html>
