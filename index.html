@@ -35,7 +35,8 @@
                 <ol>
                     <li><a href="#homepage">Home</a></li>
                     <li><a href="newContact.php">New Contact</a></li>
-                    <li><a href="view_users.php">Users</a></li>
+                    <li><a href="#" onclick="showSection('viewUsers')">Users</a></li>
+                    <li><a href="#" onclick="showSection('viewContact')">View Contact</a></li>
                     <li><a href="#" id="logout-button">Logout</a></li>
                 </ol>
             </nav>
@@ -68,42 +69,42 @@
                             <td>michael.scott@paper.co</td>
                             <td>The Paper Company</td>
                             <td><span class="type-badge sales">SALES LEAD</span></td>
-                            <td><a href="#" class="view-link">View</a></td>
+                            <td><a href="#" class="view-link" onclick="showSection('viewContact')">View</a></td>
                         </tr>
                         <tr>
                             <td>Mr. Dwight Schrute</td>
                             <td>dwight.schrute@paper.co</td>
                             <td>The Paper Company</td>
                             <td><span class="type-badge support">SUPPORT</span></td>
-                            <td><a href="#" class="view-link">View</a></td>
+                            <td><a href="#" class="view-link" onclick="showSection('viewContact')">View</a></td>
                         </tr>
                         <tr>
                             <td>Ms. Pam Beesly</td>
                             <td>pam.beesly@dunder.co</td>
                             <td>Dunder Mifflin</td>
                             <td><span class="type-badge support">SUPPORT</span></td>
-                            <td><a href="#" class="view-link">View</a></td>
+                            <td><a href="#" class="view-link" onclick="showSection('viewContact')">View</a></td>
                         </tr>
                         <tr>
                             <td>Ms. Angela Martin</td>
                             <td>angela.martin@vance.co</td>
                             <td>Vance Refrigeration</td>
                             <td><span class="type-badge sales">SALES LEAD</span></td>
-                            <td><a href="#" class="view-link">View</a></td>
+                            <td><a href="#" class="view-link" onclick="showSection('viewContact')">View</a></td>
                         </tr>
                         <tr>
                             <td>Ms. Kelly Kapoor</td>
                             <td>kelly.kapoor@vance.co</td>
                             <td>Vance Refrigeration</td>
                             <td><span class="type-badge support">SUPPORT</span></td>
-                            <td><a href="#" class="view-link">View</a></td>
+                            <td><a href="#" class="view-link" onclick="showSection('viewContact')">View</a></td>
                         </tr>
                         <tr>
                             <td>Mr. Jim Halpert</td>
                             <td>jim.halpert@dunder.co</td>
                             <td>Dunder Mifflin</td>
                             <td><span class="type-badge sales">SALES LEAD</span></td>
-                            <td><a href="#" class="view-link">View</a></td>
+                            <td><a href="#" class="view-link" onclick="showSection('viewContact')">View</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -126,6 +127,40 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- View Contact Section -->
+        <div id="viewContact-section" class="hidden">
+            <h1>Contact Details</h1>
+            <div id="contactDetails">
+                <!-- Contact details will load here dynamically -->
+            </div>
+
+            <script>
+                async function loadContactDetails(contactId = 1) {
+                    const contactDetailsDiv = document.getElementById('contactDetails');
+                    contactDetailsDiv.innerHTML = '<p>Loading...</p>'; // Add a loading message
+
+                    try {
+                        const response = await fetch(`/api/contact?id=${contactId}`); // Dynamic ID
+                        if (!response.ok) throw new Error('Failed to fetch contact details');
+                        const data = await response.json();
+
+                        contactDetailsDiv.innerHTML = `
+                            <p><strong>Name:</strong> ${data.firstname || 'N/A'} ${data.lastname || 'N/A'}</p>
+                            <p><strong>Email:</strong> ${data.email || 'N/A'}</p>
+                            <p><strong>Phone:</strong> ${data.telephone || 'N/A'}</p>
+                            <p><strong>Company:</strong> ${data.company || 'N/A'}</p>
+                            <p><strong>Notes:</strong> ${data.notes || 'No notes available'}</p>
+                        `;
+                    } catch (error) {
+                        console.error(error);
+                        contactDetailsDiv.innerHTML = '<p class="error">Failed to load contact details.</p>';
+                    }
+                }
+
+                loadContactDetails();
+            </script>
+        </div>
     </div>
 
     <!-- Scripts -->
@@ -139,14 +174,10 @@
             document.getElementById('login-form').classList.add('hidden');
             document.getElementById('dashboard').classList.add('hidden');
             document.getElementById('viewUsers-section').classList.add('hidden');
+            document.getElementById('viewContact-section').classList.add('hidden');
 
             // Show the selected section
             document.getElementById(`${section}-section`).classList.remove('hidden');
-
-            // If "viewUsers" section is shown, load users dynamically
-            if (section === 'viewUsers') {
-                loadViewUsers();
-            }
         }
     </script>
 
