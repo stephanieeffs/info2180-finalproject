@@ -1,3 +1,4 @@
+// Function to toggle visibility of sections
 function loginUser() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -13,19 +14,9 @@ function loginUser() {
     .then(data => {
         console.log("Login Response:", data);
 
-        const loginForm = document.getElementById("login-form");
-        const dashboard = document.getElementById("dashboard");
-
-        if (!loginForm || !dashboard) {
-            console.error("Error: Elements not found in DOM.");
-            return; // Exit the function to avoid further errors
-        }
-
         if (data.success) {
-            // Hide login form and show dashboard
-            loginForm.classList.add("hidden");
-            dashboard.classList.remove("hidden");
-
+            // Use showSection to toggle the dashboard
+            showSection('dashboard');
             console.log("Dashboard displayed successfully.");
             loadDashboardContacts();
         } else {
@@ -34,6 +25,7 @@ function loginUser() {
     })
     .catch(error => console.error("Fetch error:", error));
 }
+
 function loadDashboardContacts() {
     console.log("Fetching contacts...");
     fetch('dashboard.php?action=fetch_contacts')

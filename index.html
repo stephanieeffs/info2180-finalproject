@@ -36,7 +36,7 @@
                     <li><a href="#homepage">Home</a></li>
                     <li><a href="newContact.php">New Contact</a></li>
                     <li><a href="users.php">Users</a></li>
-                    <li><a href="logout.php">Logout</a></li>
+                    <li><a href="#" id="logout-button">Logout</a></li>
                 </ol>
             </nav>
             <main>
@@ -48,10 +48,9 @@
                     <span class="filter-icon-label">
                         <i class="fas fa-filter"></i> Filter By:
                     </span>
-                    <a href="dashboard.php?filter=All" class="filter-btn active" aria-current="page">All</a>
-                    <a href="dashboard.php?filter=Sales" class="filter-btn">Sales Leads</a>
-                    <a href="dashboard.php?filter=Support" class="filter-btn">Support</a>
-                    <a href="dashboard.php?filter=AssignedTo" class="filter-btn">Assigned to me</a>
+                    <a href="#" class="filter-btn active" data-filter="all">All</a>
+                    <a href="#" class="filter-btn" data-filter="sales">Sales Leads</a>
+                    <a href="#" class="filter-btn" data-filter="support">Support</a>
                 </div>
                 <table class="contacts-table">
                     <thead>
@@ -60,6 +59,7 @@
                             <th>Email</th>
                             <th>Company</th>
                             <th>Type</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,7 +87,7 @@
                         <tr>
                             <td>Ms. Angela Martin</td>
                             <td>angela.martin@vance.co</td>
-                            <td>Vance Refrigeration </td>
+                            <td>Vance Refrigeration</td>
                             <td><span class="type-badge sales">SALES LEAD</span></td>
                             <td><a href="#" class="view-link">View</a></td>
                         </tr>
@@ -105,15 +105,15 @@
                             <td><span class="type-badge sales">SALES LEAD</span></td>
                             <td><a href="#" class="view-link">View</a></td>
                         </tr>
-                        <script src="dashboard.js"></script>
-    
                     </tbody>
                 </table>
+            </main>
         </div>
     </div>
 
     <!-- Scripts -->
     <script src="login.js"></script>
     <script src="dashboard.js"></script>
+    <script src="logout.js"></script>
 </body>
 </html>
