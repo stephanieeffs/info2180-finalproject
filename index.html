@@ -109,11 +109,46 @@
                 </table>
             </main>
         </div>
+        <!-- View Users Section -->
+        <div id="viewUsers-section" class="hidden">
+            <h2>List of Users</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Date Created</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                <!-- User data will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!-- Scripts -->
     <script src="login.js"></script>
     <script src="dashboard.js"></script>
     <script src="logout.js"></script>
+    <script src="view_users.js"></script>
+    <script>
+        // Function to toggle visibility of sections
+        function showSection(section) {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('viewUsers-section').classList.add('hidden');
+
+            // Show the selected section
+            document.getElementById(`${section}-section`).classList.remove('hidden');
+
+            // If "viewUsers" section is shown, load users dynamically
+            if (section === 'viewUsers') {
+                loadViewUsers();
+            }
+        }
+    </script>
+
 </body>
 </html>

@@ -3,10 +3,10 @@ function loadViewUsers() {
     fetch("view_users.php") // Request to your PHP script
         .then((response) => response.json()) // Parse response as JSON
         .then((data) => {
-            if (data.success) {
-                const tableBody = document.getElementById("userTableBody"); // Target table body
-                tableBody.innerHTML = ""; // Clear any existing table content
+            const tableBody = document.getElementById("userTableBody"); // Target table body
+            tableBody.innerHTML = ""; // Clear any existing table content
 
+            if (data.success) {
                 // Loop through each user object and create table rows
                 data.data.forEach((user) => {
                     const row = document.createElement("tr"); // Create table row
@@ -19,15 +19,29 @@ function loadViewUsers() {
                     tableBody.appendChild(row); // Add row to the table
                 });
             } else {
-                alert("Error: " + data.error); // Display error message
+                // Display an error message in the table
+                tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: red;">${data.error}</td></tr>`;
             }
         })
         .catch((error) => {
-            console.error("Error fetching users:", error); // Log any errors
+            console.error("Error fetching users:", error);
+            const tableBody = document.getElementById("userTableBody");
+            tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: red;">Failed to load users.</td></tr>`;
         });
 }
 
-// Automatically load users when the DOM is fully loaded
-document.addEventListener("DOMContentLoaded", () => {
-    loadViewUsers();
-});
+// Function to handle section visibility and load users when navigating
+function showSection(section) {
+    // Hide all sections
+    document.getElementById('login-form').classList.add('hidden');
+    document.getElementById('dashboard').classList.add('hidden');
+    document.getElementById('viewUsers-section').classList.add('hidden');
+
+    // Show the selected section
+    document.getElementById(`${section}-section`).classList.remove('hidden');
+
+    // Load user data only when the "viewUsers" section is shown
+    if (section === "viewUsers") {
+        loadViewUsers();
+    }
+}
