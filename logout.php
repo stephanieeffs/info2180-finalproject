@@ -1,11 +1,11 @@
 <?php
-session_start(); // Start the session
+session_start(); 
 
-// Destroy the session
-session_unset(); // Unset all session variables
-session_destroy(); // Destroy the session completely
 
-// Return a JSON response
+session_unset();
+session_destroy(); 
+
+
 header('Content-Type: application/json');
 echo json_encode(["success" => true]);
 exit;

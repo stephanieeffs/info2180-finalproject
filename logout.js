@@ -1,4 +1,4 @@
-// Function to toggle visibility of sections
+// Function to show a specific section and hide others
 function showSection(section) {
     document.getElementById("login-form").classList.add("hidden");
     document.getElementById("dashboard").classList.add("hidden");
@@ -11,7 +11,7 @@ function showSection(section) {
     }
 }
 
-// Logout Functionality
+// Function to handle user logout
 function logoutUser() {
     const confirmLogout = confirm("Are you sure you want to log out?");
     
@@ -24,39 +24,7 @@ function logoutUser() {
         .then((data) => {
             if (data.success) {
                 alert("Logout successful!");
-                showSection('login-form'); // Show login form after logout
-            } else {
-                alert("Logout failed: " + data.error);
-            }
-        })
-        .catch((error) => {
-            console.error("Fetch error:", error);
-            alert("An error occurred while logging out. Please try again.");
-        });
-    }
-}
-
-// Add event listener for the logout button
-document.addEventListener("DOMContentLoaded", () => {
-    const logoutButton = document.getElementById("logout-button");
-    if (logoutButton) {
-        logoutButton.addEventListener("click", logoutUser);
-    }
-});
-
-function logoutUser() {
-    const confirmLogout = confirm("Are you sure you want to log out?");
-    
-    if (confirmLogout) {
-        fetch("logout.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" }
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.success) {
-                alert("Logout successful!");
-                showSection('login-form'); // Show login form
+                showSection('login-form'); // Show login form after successful logout
             } else {
                 alert("Logout failed: " + data.error);
             }
@@ -70,7 +38,7 @@ function logoutUser() {
     }
 }
 
-// Add event listener to the logout button
+// Event listener for logout button
 document.addEventListener("DOMContentLoaded", () => {
     const logoutButton = document.getElementById("logout-button");
     if (logoutButton) {
