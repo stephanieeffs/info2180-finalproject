@@ -1,21 +1,27 @@
 function logoutUser() {
-    // Show a confirmation prompt
     const confirmLogout = confirm("Are you sure you want to log out?");
     
     if (confirmLogout) {
+        // Send a POST request to logout.php to destroy the session
         fetch("logout.php", {
-            method: "POST", // Sends a POST request to destroy the session
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
         })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.success) {
-                    alert("Logout successful!");
-                    window.location.href = "login.html"; // Redirect to the login page
-                } else {
-                    alert("Logout failed: " + data.error);
-                }
-            })
-            .catch((error) => console.error("Fetch error:", error));
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.success) {
+                alert("Logout successful!");
+                window.location.href = "login.html";
+            } else {
+                alert("Logout failed: " + data.error);
+            }
+        })
+        .catch((error) => {
+            console.error("Fetch error:", error);
+            alert("An error occurred while logging out. Please try again.");
+        });
     } else {
         alert("Logout canceled."); // User canceled the logout
     }
